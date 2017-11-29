@@ -10,12 +10,14 @@ class TestClassBalance(unittest.TestCase):
         self.assertRaises(ValueError, balance_oversample, [], [1])
 
     def test_balances_classes_correctly(self):
-        x = [135, 31576, 3134, 26442, 486, 3587]
+        x = np.array([[135, 2], [31576, 3], [3134, 4], [26442, 5], [486, 6], [3587, 7]])
         y = np.array([10, 20, 20, 30, 30, 30])
         _, counts_before = np.unique(y, return_counts=True)
 
         x2, y2 = balance_oversample(x, y)
         _, counts_after = np.unique(y2, return_counts=True)
+        print x
+        print x2
 
         def is_balanced(value):
             return value == max(counts_before)
