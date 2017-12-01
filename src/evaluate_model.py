@@ -7,10 +7,10 @@ from sklearn.pipeline import Pipeline
 from scipy import interp
 
 def evaluate_model(x, y, classifier, preprocess_train=None):
+    
     if preprocess_train is None:
         def ll(x,y):
             return x,y
-        # preprocess_train = lambda x, y: x, y
         preprocess_train = ll
 
     cv = StratifiedKFold(n_splits=10)
@@ -22,6 +22,7 @@ def evaluate_model(x, y, classifier, preprocess_train=None):
     importances = []
 
     i = 0
+    plt.figure(figsize=(20,10))
     for train, test in cv.split(x, y):
         
         x_train, y_train = preprocess_train(x.iloc[train], y.iloc[train])
@@ -61,5 +62,7 @@ def evaluate_model(x, y, classifier, preprocess_train=None):
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     plt.title('Receiver operating characteristic')
-    plt.legend(loc="lower right")
+    plt.legend(bbox_to_anchor=(1.04,1), loc="lower right")
     plt.show()
+
+    return importances
