@@ -62,7 +62,7 @@ def evaluate_model(x, y, classifier, preprocess_train=None):
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     plt.title('Receiver operating characteristic')
-    plt.legend(bbox_to_anchor=(1.04,1), loc="lower right")
+    plt.legend(bbox_to_anchor=(-0.1,0), loc="lower right")
     plt.show()
 
     return importances
